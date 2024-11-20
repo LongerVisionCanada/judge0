@@ -3,7 +3,7 @@ x-logging:
   logging:
     driver: json-file
     options:
-      max-size: 100M
+      max-size: 8192M
 
 services:
   server:
@@ -26,7 +26,7 @@ services:
     restart: always
 
   db:
-    image: postgres:16.2
+    image: postgres:latest
     env_file: judge0.conf
     volumes:
       - data:/var/lib/postgresql/data/
@@ -34,7 +34,7 @@ services:
     restart: always
 
   redis:
-    image: redis:7.2.4
+    image: redis:latest
     command: [
       "bash", "-c",
       'docker-entrypoint.sh --appendonly no --requirepass "$$REDIS_PASSWORD"'
